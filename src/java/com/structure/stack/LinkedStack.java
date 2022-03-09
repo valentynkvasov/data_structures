@@ -1,6 +1,6 @@
 package com.structure.stack;
 
-import java.util.EmptyStackException;
+import java.util.*;
 
 public class LinkedStack<T> {
 
@@ -33,6 +33,7 @@ public class LinkedStack<T> {
 
         return item;
     }
+
 
     private class Node {
         T data;

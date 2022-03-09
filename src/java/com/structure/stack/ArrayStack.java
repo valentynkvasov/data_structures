@@ -1,6 +1,7 @@
 package com.structure.stack;
 
-import java.util.EmptyStackException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ArrayStack<T> {
 
@@ -13,14 +14,15 @@ public class ArrayStack<T> {
     }
 
     public void push(T element) {
-        if(size == objects.length - 1) {
+        if (size == objects.length - 1) {
             grow();
         }
+        size ++;
         objects[size++] = element;
     }
 
     public T peek() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
 
@@ -28,7 +30,7 @@ public class ArrayStack<T> {
     }
 
     public T pop() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
 

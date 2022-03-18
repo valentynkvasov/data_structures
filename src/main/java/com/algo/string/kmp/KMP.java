@@ -1,4 +1,4 @@
-package com.algo.kmp;
+package com.algo.string.kmp;
 
 /**
  * Do pattern matching using KMP algorithm
@@ -13,7 +13,7 @@ public class KMP {
     //0123456789
 
     //0000121210
-    private static int[] buildPattern(String pattern) {
+    private int[] buildPattern(String pattern) {
         int[] kmpArray = new int[pattern.length()];
         char[] chars = pattern.toCharArray();
         for(int i = 0, j = 1; j < chars.length;) {
@@ -30,7 +30,7 @@ public class KMP {
         return kmpArray;
     }
 
-    private static boolean searchSubstring(String str, String pattern) {
+    public boolean searchPattern(String str, String pattern) {
         int[] kmpArray = buildPattern(pattern);
         int i = 0, j = 0;
         while (i < str.length() && j < pattern.length()) {
@@ -48,8 +48,4 @@ public class KMP {
         return j == pattern.length();
     }
 
-    public static void main(String[] args) {
-        KMP kmp = new KMP();
-        System.out.println(kmp.searchSubstring("absccaabccabazbac", "abccababac"));
-    }
 }

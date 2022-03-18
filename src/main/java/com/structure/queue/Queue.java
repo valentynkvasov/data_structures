@@ -1,7 +1,5 @@
 package com.structure.queue;
 
-import java.util.*;
-
 public class Queue<T>{
 
     private Node head;

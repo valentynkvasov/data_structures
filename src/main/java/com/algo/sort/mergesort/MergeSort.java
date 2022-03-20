@@ -1,16 +1,16 @@
-package com.algo.merge_sort;
+package com.algo.sort.mergesort;
 
 import java.util.Arrays;
 
 /**
  * Do sorting algo using MergeSort algorithm
- * <p>
+ *
  * Runtime complexity - O(n * log(n))
  * Space complexity - O(n)
  */
 public class MergeSort {
 
-    public void mergeSort(int[] arr) {
+    public void sort(int[] arr) {
         divide(arr, arr.length);
     }
 
@@ -52,10 +52,4 @@ public class MergeSort {
         }
     }
 
-    public static void main(String[] args) {
-        MergeSort mergeSort = new MergeSort();
-        int[] arr = {1, 4, 2, 56, 2, 4, 2, 1, 3};
-        mergeSort.mergeSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 }

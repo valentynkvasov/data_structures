@@ -3,6 +3,7 @@ package com.algo.string;
 
 import com.algo.string.kmp.KMP;
 import com.algo.string.naive.NaiveStringComparison;
+import com.algo.string.rabinkarp.RabinKarp;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -17,25 +18,27 @@ import java.util.concurrent.TimeUnit;
 
 /**
 
-Benchmark                   (N)  Mode  Cnt    Score   Error  Units
-StringBenchmark.kmpCheck     12  avgt    5   46.406 ± 5.982  ms/op
-StringBenchmark.naiveCheck   12  avgt    5  207.723 ± 4.941  ms/op
+ Benchmark                        (N)  Mode  Cnt    Score   Error  Units
+ StringBenchmark.kmpCheck         10  avgt    5  0.005 ±  0.001  ms/op
+ StringBenchmark.naiveCheck       10  avgt    5  0.034 ±  0.001  ms/op
+ StringBenchmark.rabinKarpCheck   10  avgt    5  0.384 ±  0.009  ms/op
 
  */
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 5, jvmArgs = {"-Xmx500m"})
+@Fork(value = 1, jvmArgs = {"-Xmx500m"})
 public class StringBenchmark {
 
-    @Param({"10"})
+    @Param({"12"})
     private int N;
 
     private static final KMP kmp = new KMP();
+    private static final RabinKarp rabinKarp = new RabinKarp();
     private static final NaiveStringComparison naive = new NaiveStringComparison();
     private static final List<String> DATA_FOR_TESTING = new ArrayList<>();
-    private static final String pattern = RandomStringUtils.random(20, true, false);
+    private static final String pattern = RandomStringUtils.random(25, true, false);
 
     public static void main(String[] args) throws RunnerException {
 
@@ -49,7 +52,7 @@ public class StringBenchmark {
 
     @Setup
     public void setUp() {
-        for(int i = 0, size = 20; i < N; size*=2, i++) {
+        for(int i = 0, size = 30; i < N; size*=2, i++) {
             DATA_FOR_TESTING.add(RandomStringUtils.random(size, true, false));
         }
     }
@@ -65,6 +68,13 @@ public class StringBenchmark {
     public void naiveCheck(Blackhole bh) {
         for (String str : DATA_FOR_TESTING) {
             naive.searchPattern(str, pattern);
+        }
+    }
+
+    @Benchmark
+    public void rabinKarpCheck(Blackhole bh) {
+        for (String str : DATA_FOR_TESTING) {
+            rabinKarp.searchPattern(str, pattern);
         }
     }
 }

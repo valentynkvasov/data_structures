@@ -8,30 +8,32 @@ package com.algo.string.kmp;
  */
 public class KMP {
 
-    //  i   j
-    //abccababac
-    //0123456789
+    /**
+             i   j
+          abccababac
+          0123456789
 
-    //0000121210
+    lps = 0000121210
+    */
     private int[] buildPattern(String pattern) {
-        int[] kmpArray = new int[pattern.length()];
+        int[] lps = new int[pattern.length()];
         char[] chars = pattern.toCharArray();
         for(int i = 0, j = 1; j < chars.length;) {
             if(chars[i] == chars[j]) {
-                kmpArray[j++] = i++ + 1;
+                lps[j++] = i++ + 1;
             } else {
                 if(i != 0) {
-                    i = kmpArray[i - 1];
+                    i = lps[i - 1];
                 } else {
                     j++;
                 }
             }
         }
-        return kmpArray;
+        return lps;
     }
 
     public boolean searchPattern(String str, String pattern) {
-        int[] kmpArray = buildPattern(pattern);
+        int[] lps = buildPattern(pattern);
         int i = 0, j = 0;
         while (i < str.length() && j < pattern.length()) {
             if(str.charAt(i) == pattern.charAt(j)) {
@@ -39,7 +41,7 @@ public class KMP {
                 j++;
             } else {
                 if(j != 0) {
-                    j = kmpArray[j - 1];
+                    j = lps[j - 1];
                 } else {
                     i++;
                 }

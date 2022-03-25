@@ -26,28 +26,6 @@ public class PriorityQueue<T extends Comparable<T>> {
         return temp;
     }
 
-    public static void main(String[] args) {
-        System.out.println(maxUniqueSplit("abacdec"));
-    }
-
-    public static int maxUniqueSplit(String s) {
-        Set<String> set = new HashSet<>();
-        return dfs(set, 0, s);
-    }
-
-    private static int dfs(Set<String> set, int idx, String s) {
-        if (idx >= s.length()) return 0;
-        int res = Integer.MAX_VALUE;  // did not find method to split;
-        for (int i = idx + 1; i <= s.length(); i++) {
-            String sub = s.substring(idx, i);
-            if (!set.add(sub)) continue; //already contains sub
-            int next = dfs(set, i, s);
-            if (next >= 0) res = Math.min(res, next + 1);
-            set.remove(sub);
-        }
-        return res;
-    }
-
     private void sink(int k) {
         while (2 * k <= pointer) {
             int j = 2 * k;

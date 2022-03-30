@@ -1,5 +1,6 @@
 package com.structure.segment_tree;
 
+//https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/
 public class SegmentTree {
 
     private final int[] arr;

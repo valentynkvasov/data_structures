@@ -13,7 +13,7 @@ public class PostOrderTraverseIterative {
         Stack<BinaryTree.Node> stack = new Stack<>();
         stack.add(node);
 
-        while (stack != null) {
+        while (!stack.isEmpty()) {
             BinaryTree.Node pop = stack.pop();
             System.out.println(pop.data);
 
@@ -31,7 +31,7 @@ public class PostOrderTraverseIterative {
         Queue<BinaryTree.Node> queue = new LinkedList<>();
         queue.add(node);
 
-        while (queue != null) {
+        while (!queue.isEmpty()) {
             BinaryTree.Node poll = queue.poll();
             System.out.println(poll.data);
 
